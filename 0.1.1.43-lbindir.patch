@@ -1,0 +1,33 @@
+--- origsrc/mono-based-binutils/configure	2010-07-21 00:30:02.000000000 -0500
++++ src/mono-based-binutils/configure	2010-07-21 00:56:31.298246600 -0500
+@@ -2361,7 +2361,7 @@ if test $target_cpu != cil32; then
+    as_fn_error "Wrong target, target must be cil32" "$LINENO" 5
+ fi
+ 
+-lbindir="\$(prefix)/lbin"
++lbindir="\$(prefix)/lib/cil32-binutils"
+ 
+ 
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether ln -s works" >&5
+--- origsrc/mono-based-binutils/configure.ac	2010-07-21 00:30:02.000000000 -0500
++++ src/mono-based-binutils/configure.ac	2010-07-21 00:56:21.096663100 -0500
+@@ -17,7 +17,7 @@ if test $target_cpu != cil32; then
+    AC_ERROR([Wrong target, target must be cil32])
+ fi
+ 
+-lbindir="\$(prefix)/lbin"
++lbindir="\$(prefix)/lib/cil32-binutils"
+ AC_SUBST(lbindir)
+ 
+ AC_PROG_LN_S
+--- origsrc/mono-based-binutils/scripts/base-tool-script.in	2010-07-21 00:30:01.000000000 -0500
++++ src/mono-based-binutils/scripts/base-tool-script.in	2010-07-21 00:57:06.450257100 -0500
+@@ -20,7 +20,7 @@ while test -n "$1"; do
+   esac
+ done
+ 
+-CMD="@CILRUN@ $basedir/lbin/@TOOLNAME@.exe $PARAM"
++CMD="@CILRUN@ $basedir/lib/cil32-binutils/@TOOLNAME@.exe $PARAM"
+ if test -n "$VERBOSE"; then
+     echo $CMD
+ fi

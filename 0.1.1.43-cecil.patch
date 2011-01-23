@@ -1,0 +1,26 @@
+--- origsrc/mono-based-binutils/tools/Makefile.am	2010-07-21 00:30:01.000000000 -0500
++++ src/mono-based-binutils/tools/Makefile.am	2010-07-21 00:49:12.509149300 -0500
+@@ -4,8 +4,8 @@ lbin_DATA = Mono.Cecil.dll gcc4cli.utils
+ MONOCECIL = $(shell cat $(srcdir)/Mono.Cecil/Mono.Cecil.dll.sources)
+ CECIL_SRC = $(MONOCECIL:%=$(srcdir)/Mono.Cecil/%)
+ 
+-Mono.Cecil.dll: $(CECIL_SRC)
+-	  $(MCS) -t:library -out:Mono.Cecil.dll $(CECIL_SRC)
++Mono.Cecil.dll:
++	cp $(shell pkg-config --variable=Libraries cecil) .
+ 
+ UTILS_SRC = \
+ 	gcc4cli/utils/AssemblyResolver.cs \
+--- origsrc/mono-based-binutils/tools/Makefile.in	2010-07-21 00:30:01.000000000 -0500
++++ src/mono-based-binutils/tools/Makefile.in	2010-07-21 00:49:12.514149500 -0500
+@@ -431,8 +431,8 @@ uninstall-am: uninstall-lbinDATA
+ 	uninstall-am uninstall-lbinDATA
+ 
+ 
+-Mono.Cecil.dll: $(CECIL_SRC)
+-	  $(MCS) -t:library -out:Mono.Cecil.dll $(CECIL_SRC)
++Mono.Cecil.dll:
++	cp $(shell pkg-config --variable=Libraries cecil) .
+ 
+ gcc4cli.utils.dll: $(UTILS_FULL_SRC) AssemblyInfo.cs Mono.Cecil.dll
+ 	$(MCS) $(MCS_FLAGS) -t:library -out:gcc4cli.utils.dll $(UTILS_FULL_SRC) AssemblyInfo.cs

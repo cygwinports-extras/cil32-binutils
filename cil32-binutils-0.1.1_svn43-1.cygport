@@ -1,0 +1,17 @@
+SVN_URI="http://clibinutils.svn.sourceforge.net/svnroot/clibinutils/mono-based-binutils"
+SVN_REV=${PV#*svn}
+# cannot inherit toolchain; cil32 is not a registered cpu
+inherit svn
+
+
+PATCH_URI="
+	0.1.1.43-cecil.patch
+	0.1.1.43-lbindir.patch
+"
+
+src_compile() {
+	# no autoreconf, included config.sub is patched to accept cil32
+	cd ${B}
+	cygconf --target=cil32 --with-ilasm=/usr/bin/ilasm --with-mcs=/usr/bin/gmcs
+	cygmake
+}
